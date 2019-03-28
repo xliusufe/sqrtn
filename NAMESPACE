@@ -1,0 +1,2 @@
+useDynLib(sqrtn)
+exportPattern("^[[:alpha:]]+")

@@ -1,0 +1,14 @@
+Package: sqrtn
+Type: Package
+Title: Calculate sqrt(n) with very high precision
+Version: 1.0
+Date: 2019-03-16
+Author: Xu Liu
+Maintainer: Xu Liu <liu.xu@sufe.edu.cn>
+Description: Calculate sqrt(n) with very high precision, for example 10,000 or bigger. 
+License: GPL (>= 2)
+Depends: R (>= 3.2.0)
+Repository: GitHub
+NeedsCompilation: yes
+Encoding: UTF-8
+Packaged: 2019-03-16 17:45:46 UTC; xu2207
