@@ -11,7 +11,7 @@ An R pacakge to calculate sqrt(n) with very high precision. Currenly, we approxi
 
    - [x] [sqrtn-manual.pdf](https://github.com/xliusufe/sqrtn/blob/master/inst/sqrtn-manual.pdf) ---------- Details of the usage of the package.
    
-   - [x] [sqrt2.docx](https://github.com/xliusufe/sqrtn/blob/master/inst/sqrt2.docx) ---------- The first one million digits of the square root of 2.
+   - [x] [sqrt2-approx.pdf](https://github.com/xliusufe/sqrtn/blob/master/inst/sqrt2-approx.pdf) ---------- The first one million digits of the square root of 2.
    
 # Example
     library(sqrtn)
