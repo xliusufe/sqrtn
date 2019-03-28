@@ -1,2 +1,2 @@
 # sqrtn
-A calculator for sqrt(n) with huge high precision.
+An R pacakge to calculate sqrt(n) with very high precision.
