@@ -192,9 +192,10 @@ void divide(int *quotient, int *a, int *b, int La, int Lb,int prec){
 	free(bcopy);
 }
 
-void precesion2(int *quotient,int prec){	
-	int *a,*b;
+void precesion(char *quotient_s, int prec){	
+	int i,*a,*b,*quotient;
 	if(prec<22){
+		quotient=(int *)malloc(sizeof(int)*22);
 		a=(int *)malloc(sizeof(int)*21);
 		b=(int *)malloc(sizeof(int)*21);
 		quotient[0]=4;quotient[1]=1;quotient[2]=4;quotient[3]=2;
@@ -205,37 +206,35 @@ void precesion2(int *quotient,int prec){
 		quotient[20]=1;
 	}  		
 	else{
+		quotient=(int *)malloc(sizeof(int)*prec);
+		for(i=0;i<prec;i++) quotient[i]=0;
 		a=(int *)malloc(sizeof(int)*prec);
 		b=(int *)malloc(sizeof(int)*prec);
 		int *a1=(int *)malloc(sizeof(int)*prec);
 		int *b1=(int *)malloc(sizeof(int)*prec);
 		int *Lab=(int *)malloc(sizeof(int)*3);
 		Lab[0]=Lab[1]=Lab[2]=0;
-		for(int i=0;i<prec;i++) a1[i]=b1[i]=a[i]=b[i]=0;
+		for(i=0;i<prec;i++) a1[i]=b1[i]=a[i]=b[i]=0;
 
 		pell(a,b,a1,b1,Lab,prec,prec/2);
 		divide(quotient,a,b,Lab[0],Lab[1],prec);
 		free(a1);free(b1);free(Lab);
 	}
-	free(a);free(b);
+	quotient_s[0]='1';quotient_s[1]='.';
+	for(i=2;i<prec+2;i++) quotient_s[i] = quotient[i-2]+48;
+	quotient_s[prec+2]='\0';
+	free(a);free(b);free(quotient);
 }
 
 SEXP sqrtn(SEXP prec0, SEXP N)
 {
 	int *n_ = INTEGER(N);
 	int *prec0_ = INTEGER(prec0);
-	int n = n_[0],prec=prec0_[0],i,*quotient;
+	int n = n_[0],prec=prec0_[0],i;
 	char *quotient_s;
 	SEXP rquotient_s,rprec,list, list_names;
-	
-	quotient=(int *)malloc(sizeof(int)*prec);
-	for(i=0;i<prec;i++) quotient[i]=0;
-	precesion2(quotient,prec);
-
-	quotient_s =(char *)malloc(sizeof(char)*(prec+3));
-	quotient_s[0]='1';quotient_s[1]='.';
-	for(i=2;i<prec+2;i++) quotient_s[i] = quotient[i-2]+48;
-	quotient_s[prec+2]='\0';
+	quotient_s =(char *)malloc(sizeof(char)*(prec+3));	
+	precesion(quotient_s,prec);	
 	PROTECT(rquotient_s = allocVector(STRSXP, 1));
 	SET_STRING_ELT(rquotient_s, 0,  mkChar(quotient_s));
 
@@ -249,9 +248,8 @@ SEXP sqrtn(SEXP prec0, SEXP N)
 	PROTECT(list = allocVector(VECSXP, 2)); 
 	SET_VECTOR_ELT(list, 0, rquotient_s);
 	SET_VECTOR_ELT(list, 1, rprec);  
-	setAttrib(list, R_NamesSymbol, list_names); 
-		
-	free(quotient);
+	setAttrib(list, R_NamesSymbol, list_names); 		
+	
 	UNPROTECT(4);  
 	return(list);	
 }
