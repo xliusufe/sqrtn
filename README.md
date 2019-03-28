@@ -1,5 +1,5 @@
 # sqrtn
-An R pacakge to calculate sqrt(n) with very high precision. Currenly, we approximate sqrt(2) only. "sqrtn"" implements dramatically fast. It takes only 2.57 seconds to approximate sqrt(2) with 10000 digits, and 2.98 seconds with 100000 digits.
+An R pacakge to calculate sqrt(n) with very high precision. Currenly, we approximate sqrt(2) only. "sqrtn"" implements dramatically fast. It takes only 2.57 seconds to approximate sqrt(2) with 10,000 digits, and 2.98 seconds with 100,000 digits.
 
 # Installation
 
