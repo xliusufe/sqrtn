@@ -192,8 +192,11 @@ void divide(int *quotient, int *a, int *b, int La, int Lb,int prec){
 	free(bcopy);
 }
 
-void precesion(int *quotient, int *a, int *b,int prec){	
+void precesion2(int *quotient,int prec){	
+	int *a,*b;
 	if(prec<22){
+		a=(int *)malloc(sizeof(int)*21);
+		b=(int *)malloc(sizeof(int)*21);
 		quotient[0]=4;quotient[1]=1;quotient[2]=4;quotient[3]=2;
 		quotient[4]=1;quotient[5]=3;quotient[6]=5;quotient[7]=6;
 		quotient[8]=2;quotient[9]=3;quotient[10]=7;quotient[11]=3;
@@ -202,6 +205,8 @@ void precesion(int *quotient, int *a, int *b,int prec){
 		quotient[20]=1;
 	}  		
 	else{
+		a=(int *)malloc(sizeof(int)*prec);
+		b=(int *)malloc(sizeof(int)*prec);
 		int *a1=(int *)malloc(sizeof(int)*prec);
 		int *b1=(int *)malloc(sizeof(int)*prec);
 		int *Lab=(int *)malloc(sizeof(int)*3);
@@ -212,21 +217,20 @@ void precesion(int *quotient, int *a, int *b,int prec){
 		divide(quotient,a,b,Lab[0],Lab[1],prec);
 		free(a1);free(b1);free(Lab);
 	}
+	free(a);free(b);
 }
 
 SEXP sqrtn(SEXP prec0, SEXP N)
 {
 	int *n_ = INTEGER(N);
 	int *prec0_ = INTEGER(prec0);
-	int n = n_[0],prec=prec0_[0], i, *a,*b,*quotient;
+	int n = n_[0],prec=prec0_[0],i,*quotient;
 	char *quotient_s;
 	SEXP rquotient_s,rprec,list, list_names;
 	
-	quotient=(int *)malloc(sizeof(int)*(prec+1));
+	quotient=(int *)malloc(sizeof(int)*prec);
 	for(i=0;i<prec;i++) quotient[i]=0;
-	a=(int *)malloc(sizeof(int)*prec);
-	b=(int *)malloc(sizeof(int)*prec);
-	precesion(quotient,a,b,prec);
+	precesion2(quotient,prec);
 
 	quotient_s =(char *)malloc(sizeof(char)*(prec+3));
 	quotient_s[0]='1';quotient_s[1]='.';
@@ -247,7 +251,7 @@ SEXP sqrtn(SEXP prec0, SEXP N)
 	SET_VECTOR_ELT(list, 1, rprec);  
 	setAttrib(list, R_NamesSymbol, list_names); 
 		
-	free(a);free(b);free(quotient);
+	free(quotient);
 	UNPROTECT(4);  
 	return(list);	
 }
