@@ -21,13 +21,13 @@ An R pacakge to calculate sqrt(n) with very high precision. Currenly, we approxi
     library(sqrtn)
 
     fit <- sqrtn(100)
-    print(fit$sqrtn,quote=FALSE)
+    print(fit$sqrt2,quote=FALSE)
     #------------------------
     fit <- sqrtn(100,3)
-    print(fit$sqrtn,quote=FALSE)
+    print(fit$sqrt2,quote=FALSE)
     #------------------------
     fit <- sqrtn(100,5)
-    print(fit$sqrtn,quote=FALSE)    
+    print(fit$sqrt2,quote=FALSE)    
 
 # Development
 This R package is developed by Xu Liu (liu.xu@sufe.edu.cn).
