@@ -5,7 +5,7 @@
 An R pacakge to calculate sqrt(n) with very high precision.
 }
 \description{
-Calculate sqrt(n) with very high precision. Currenly, we approximate \eqn{\sqrt{2}} only. "sqrtn"" implements dramatically fast. It takes only \code{2.57} seconds to approximate \eqn{\sqrt{2}} with \code{10,000} digits, and \code{2.98} seconds with \code{100,000} digits.
+Calculate sqrt(n) with very high precision. Currenly, we approximate \eqn{\sqrt{2}}, \eqn{\sqrt{3}}, and \eqn{\sqrt{5}} only. "sqrtn"" implements dramatically fast. It takes only \code{2.57} seconds to approximate \eqn{\sqrt{2}} with \code{10,000} digits, and \code{2.98} seconds with \code{100,000} digits.
 }
 \usage{
 sqrtn(prec,n=2)
@@ -28,11 +28,15 @@ Xu Liu
 
 \examples{
 #Example 1
-fit <- sqrtn(10)
+fit <- sqrtn(100)
 print(fit$sqrtn,quote=FALSE)
 
 #Example 2
-fit <- sqrtn(100)
+fit <- sqrtn(100,3)
+print(fit$sqrtn,quote=FALSE)
+
+#Example 2
+fit <- sqrtn(100,5)
 print(fit$sqrtn,quote=FALSE)
 }
 

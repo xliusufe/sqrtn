@@ -6,7 +6,7 @@
 #define min(a,b) ((a > b) ? b : a)
 #define max(a,b) ((a > b) ? a : b)
 
-int pell(int *a1, int *b1, int *Lab, int N, int L0){
+int pell2(int *a1, int *b1, int *Lab, int N, int L0){
 	int i,n=14,La,ta,tb,ta1,tb1,*a,*b;
 	a1[0]=7;b1[0]=5; a1[1]=0;b1[1]=4; a1[2]=0;b1[2]=0;	a1[3]=6;b1[3]=0;
 	a1[4]=8;b1[4]=7; a1[5]=1;b1[5]=3; a1[6]=2;b1[6]=5; a1[7]=1;b1[7]=4;
@@ -20,6 +20,56 @@ int pell(int *a1, int *b1, int *Lab, int N, int L0){
 			tb1=(*a)*12+(*b)*17+tb;
 			*a=ta1%10;	*b=tb1%10;
 			ta=ta1/10;	tb=tb1/10;	
+			a++;b++;
+		}
+		Lab[0]=La;Lab[1]=La;
+		if(ta){*a+=ta;Lab[0]++;}
+		if(tb){*b+=tb;Lab[1]++;}
+		if(Lab[1]+1>=L0) return 1;
+		n+=2;
+	}		
+	return 0;
+}
+
+int pell3(int *a1, int *b1, int *Lab, int N, int L0){
+	int i,n=8,La,ta,tb,ta1,tb1,*a,*b;
+	a1[0]=1;b1[0]=0; a1[1]=5;b1[1]=4;	a1[2]=1;b1[2]=3; a1[3]=2;b1[3]=6;
+	a1[4]=8;b1[4]=2; a1[5]=3;b1[5]=6;	a1[6]=3;b1[6]=4; a1[7]=6;b1[7]=9;
+	a1[8]=8;b1[8]=6; a1[9]=9;b1[9]=5;
+	Lab[0]=10;Lab[1]=10;Lab[2]=n;	
+	while(n<N){
+		ta=tb=0;a=&a1[0];b=&b1[0];
+		La=Lab[0]+2;
+		for(i=0;i<La;i++){
+			ta1=(*a)*97+(*b)*168+ta;
+			tb1=(*a)*56+(*b)*97+tb;
+			*a=ta1%10;*b=tb1%10;
+			ta=ta1/10;tb=tb1/10;	
+			a++;b++;
+		}
+		Lab[0]=La;Lab[1]=La;
+		if(ta){*a+=ta;Lab[0]++;}
+		if(tb){*b+=tb;Lab[1]++;}
+		if(Lab[1]+1>=L0) return 1;
+		n+=2;
+	}		
+	return 0;
+}
+
+int pell5(int *a1, int *b1, int *Lab, int N, int L0){
+	int i,n=10,La,ta,tb,ta1,tb1,*a,*b;	
+	a1[0]=9;b1[0]=6; a1[1]=0;b1[1]=3; a1[2]=8;b1[2]=6; a1[3]=6;b1[3]=5;
+	a1[4]=7;b1[4]=8; a1[5]=0;b1[5]=7; a1[6]=0;b1[6]=3; a1[7]=5;b1[7]=3;
+	a1[8]=4;b1[8]=1; a1[9]=6;b1[9]=3; a1[10]=9;b1[10]=4;
+	Lab[0]=11;Lab[1]=11;Lab[2]=n;	
+	while(n<N){
+		ta=tb=0;a=&a1[0];b=&b1[0];
+		La=Lab[0]+2;
+		for(i=0;i<La;i++){
+			ta1=(*a)*161+(*b)*360+ta;
+			tb1=(*a)*72+(*b)*161+tb;
+			*a=ta1%10;*b=tb1%10;
+			ta=ta1/10;tb=tb1/10;	
 			a++;b++;
 		}
 		Lab[0]=La;Lab[1]=La;
@@ -126,18 +176,36 @@ void divide(int *quotient, int *a, int *b, int La, int Lb,int prec){
 	}	
 }
 
-void precesion(char *quotient_s, int prec){	
+void precesion(char *quotient_s, int prec,int n){	
 	int i,*a,*b,*quotient;
 	if(prec<22){
 		quotient=(int *)malloc(sizeof(int)*22);
 		a=(int *)malloc(sizeof(int)*21);
 		b=(int *)malloc(sizeof(int)*21);
-		quotient[0]=4;quotient[1]=1;quotient[2]=4;quotient[3]=2;
-		quotient[4]=1;quotient[5]=3;quotient[6]=5;quotient[7]=6;
-		quotient[8]=2;quotient[9]=3;quotient[10]=7;quotient[11]=3;
-		quotient[12]=0;quotient[13]=9;quotient[14]=5;quotient[15]=0;
-		quotient[16]=4;quotient[17]=8;quotient[18]=8;quotient[19]=0;
-		quotient[20]=1;
+		if(n==2){
+			quotient[0]=4;quotient[1]=1;quotient[2]=4;quotient[3]=2;
+			quotient[4]=1;quotient[5]=3;quotient[6]=5;quotient[7]=6;
+			quotient[8]=2;quotient[9]=3;quotient[10]=7;quotient[11]=3;
+			quotient[12]=0;quotient[13]=9;quotient[14]=5;quotient[15]=0;
+			quotient[16]=4;quotient[17]=8;quotient[18]=8;quotient[19]=0;
+			quotient[20]=1;
+		}
+		if(n==3){
+			quotient[0]=7;quotient[1]=3;quotient[2]=2;quotient[3]=0;
+			quotient[4]=5;quotient[5]=0;quotient[6]=8;quotient[7]=0;
+			quotient[8]=7;quotient[9]=5;quotient[10]=6;quotient[11]=8;
+			quotient[12]=8;quotient[13]=7;quotient[14]=7;quotient[15]=2;
+			quotient[16]=9;quotient[17]=3;quotient[18]=5;quotient[19]=2;
+			quotient[20]=7;		
+		}
+		if(n==5){
+			quotient[0]=2;quotient[1]=3;quotient[2]=6;quotient[3]=0;
+			quotient[4]=6;quotient[5]=7;quotient[6]=9;quotient[7]=7;
+			quotient[8]=7;quotient[9]=4;quotient[10]=9;quotient[11]=9;
+			quotient[12]=7;quotient[13]=8;quotient[14]=9;quotient[15]=6;
+			quotient[16]=9;quotient[17]=6;quotient[18]=4;quotient[19]=0;
+			quotient[20]=9;	
+		}
 	}  		
 	else{
 		quotient=(int *)malloc(sizeof(int)*prec);
@@ -148,13 +216,18 @@ void precesion(char *quotient_s, int prec){
 		Lab[0]=Lab[1]=Lab[2]=0;
 		for(i=0;i<prec;i++) b[i]=0;
 		for(i=0;i<2*prec;i++) a[i]=0;
-		pell(a,b,Lab,prec,prec/2);
+		if(n==2) pell2(a,b,Lab,prec,prec/2);
+		if(n==3) pell3(a,b,Lab,prec,prec/2);
+		if(n==5) pell5(a,b,Lab,prec,prec/2);
 		int *pa1=&a[2*prec-1],*pa2=&a[Lab[0]-1];
 		for(i=0;i<Lab[0];i++,pa1--,pa2--){*pa1=*pa2;*pa2=0;}
 		divide(quotient,a,b,Lab[0],Lab[1],prec);
 		free(Lab);
 	}
-	quotient_s[0]='1';quotient_s[1]='.';
+	if(n==2)quotient_s[0]='1';
+	if(n==3)quotient_s[0]='1';
+	if(n==5)quotient_s[0]='2';
+	quotient_s[1]='.';
 	for(i=2;i<prec+2;i++) quotient_s[i] = quotient[i-2]+48;
 	quotient_s[prec+2]='\0';
 	free(a);free(b);free(quotient);
@@ -168,7 +241,7 @@ SEXP sqrtn(SEXP prec0, SEXP N)
 	char *quotient_s;
 	SEXP rquotient_s,rprec,list, list_names;
 	quotient_s =(char *)malloc(sizeof(char)*(prec+3));	
-	precesion(quotient_s,prec);	
+	precesion(quotient_s,prec,n);	
 	PROTECT(rquotient_s = allocVector(STRSXP, 1));
 	SET_STRING_ELT(rquotient_s, 0,  mkChar(quotient_s));
 	PROTECT(rprec = allocVector(INTSXP, 1));
