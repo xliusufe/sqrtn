@@ -81,6 +81,32 @@ int pell5(int *a1, int *b1, int *Lab, int N, int L0){
 	return 0;
 }
 
+int pell7(int *a1, int *b1, int *Lab, int N, int L0){
+	int i,n=10,La,ta,tb,ta1,tb1,*a,*b;	
+	b1[0]=5;a1[0]=4; b1[1]=9;a1[1]=2; b1[2]=7;a1[2]=2; b1[3]=1;a1[3]=3;
+	b1[4]=2;a1[4]=7; b1[5]=5;a1[5]=8; b1[6]=5;a1[6]=6; b1[7]=3;a1[7]=5;
+	b1[8]=5;a1[8]=1; b1[9]=2;a1[9]=3; b1[10]=1;a1[10]=3;
+	Lab[0]=11;Lab[1]=11;Lab[2]=n;	
+	while(n<N){
+		ta=tb=0;a=&a1[0];b=&b1[0];
+		La=Lab[0]+2;
+		for(i=0;i<La;i++){
+			ta1=(*a)*127+(*b)*336+ta;
+			tb1=(*a)*48+(*b)*127+tb;
+			*a=ta1%10;*b=tb1%10;
+			ta=ta1/10;tb=tb1/10;	
+			a++;b++;
+		}
+		Lab[0]=La;Lab[1]=La;
+		if(ta){*a+=ta;Lab[0]++;}
+		if(tb){*b+=tb;Lab[1]++;}
+		if(Lab[1]+1>=L0) return 1;
+		n+=2;
+	}		
+	return 0;
+}
+
+
 void plus1(int *a, int b, int curr_len){
 	int *pa=&a[curr_len-1];
 	for(int i=0;i<curr_len;i++,pa--){
@@ -206,6 +232,14 @@ void precesion(char *quotient_s, int prec,int n){
 			quotient[16]=9;quotient[17]=6;quotient[18]=4;quotient[19]=0;
 			quotient[20]=9;	
 		}
+		if(n==7){
+			quotient[0]=6;quotient[1]=4;quotient[2]=5;quotient[3]=7;
+			quotient[4]=5;quotient[5]=1;quotient[6]=3;quotient[7]=1;
+			quotient[8]=1;quotient[9]=0;quotient[10]=6;quotient[11]=4;
+			quotient[12]=5;quotient[13]=9;quotient[14]=0;quotient[15]=5;
+			quotient[16]=1;quotient[17]=6;quotient[18]=1;quotient[19]=5;
+			quotient[20]=7;			
+		}
 	}  		
 	else{
 		quotient=(int *)malloc(sizeof(int)*prec);
@@ -219,6 +253,7 @@ void precesion(char *quotient_s, int prec,int n){
 		if(n==2) pell2(a,b,Lab,prec,prec/2);
 		if(n==3) pell3(a,b,Lab,prec,prec/2);
 		if(n==5) pell5(a,b,Lab,prec,prec/2);
+		if(n==7) pell7(a,b,Lab,prec,prec/2);
 		int *pa1=&a[2*prec-1],*pa2=&a[Lab[0]-1];
 		for(i=0;i<Lab[0];i++,pa1--,pa2--){*pa1=*pa2;*pa2=0;}
 		divide(quotient,a,b,Lab[0],Lab[1],prec);
@@ -227,6 +262,7 @@ void precesion(char *quotient_s, int prec,int n){
 	if(n==2)quotient_s[0]='1';
 	if(n==3)quotient_s[0]='1';
 	if(n==5)quotient_s[0]='2';
+	if(n==7)quotient_s[0]='2';
 	quotient_s[1]='.';
 	for(i=2;i<prec+2;i++) quotient_s[i] = quotient[i-2]+48;
 	quotient_s[prec+2]='\0';
