@@ -251,9 +251,9 @@ void divide(int *quotient, int *a, int *b, int La, int Lb,int prec){
 	}	
 }
 
-void precesion(char *quotient_s, int prec,int n){	
-	int i,*a,*b,*quotient,f1=sqrt(1.0*n); 	
-	if(prec<22)prec=30;
+void precesion(char *quotient_s, int prec0,int n){	
+	int i,*a,*b,*quotient,f1=sqrt(1.0*n),prec; 	
+	prec0<22?(prec=24):(prec=prec0);
 	quotient=(int *)malloc(sizeof(int)*prec);
 	for(i=0;i<prec;i++) quotient[i]=0;
 	a=(int *)malloc(sizeof(int)*2*prec);
@@ -271,8 +271,8 @@ void precesion(char *quotient_s, int prec,int n){
 	for(i=0;i<Lab[0];i++,pa1--,pa2--){*pa1=*pa2;*pa2=0;}
 	divide(quotient,a,b,Lab[0],Lab[1],prec);
 	quotient_s[0]=f1+48; quotient_s[1]='.';
-	for(i=2;i<prec+2;i++) quotient_s[i] = quotient[i-2]+48;
-	quotient_s[prec+2]='\0';
+	for(i=2;i<prec0+2;i++) quotient_s[i] = quotient[i-2]+48;
+	quotient_s[prec0+2]='\0';
 	free(a);free(b);free(quotient);free(Lab);
 }
 
