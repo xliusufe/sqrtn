@@ -253,6 +253,7 @@ void divide(int *quotient, int *a, int *b, int La, int Lb,int prec){
 
 void precesion(char *quotient_s, int prec,int n){	
 	int i,*a,*b,*quotient,f1=sqrt(1.0*n); 	
+	if(prec<22)prec=30;
 	quotient=(int *)malloc(sizeof(int)*prec);
 	for(i=0;i<prec;i++) quotient[i]=0;
 	a=(int *)malloc(sizeof(int)*2*prec);
