@@ -2,10 +2,10 @@
 \alias{sqrtn}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-An R pacakge to calculate sqrt(n) with very high precision.
+An R pacakge to calculate \eqn{\sqrt{n}} with very high precision.
 }
 \description{
-Calculate sqrt(n) with very high precision. Currenly, we approximate \eqn{\sqrt{2}}, \eqn{\sqrt{3}}, \eqn{\sqrt{5}}, and \eqn{\sqrt{7}} only. "sqrtn"" implements dramatically fast. It takes only \code{2.57} seconds to approximate \eqn{\sqrt{2}} with \code{10,000} digits, and \code{2.98} seconds with \code{100,000} digits.
+Calculate \eqn{\sqrt{n}} with very high precision. Currenly, we approximate \eqn{\sqrt{n}} with \eqn{n<10}, that is, \eqn{\sqrt{2}}, \eqn{\sqrt{3}}, \eqn{\sqrt{5}}, , \eqn{\sqrt{6}}, , \eqn{\sqrt{7}} and \eqn{\sqrt{8}} only. "sqrtn"" implements dramatically fast. It takes only \code{29} seconds to approximate \eqn{\sqrt{2}} with \code{100,000} digits.
 }
 \usage{
 sqrtn(prec,n=2)

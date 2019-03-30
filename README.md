@@ -1,5 +1,5 @@
 # sqrtn
-An R pacakge to calculate sqrt(n) with very high precision. Currenly, we approximate sqrt(n) with n<10, that is, sqrt(2), sqrt(3), sqrt(5), sqrt(6), sqrt(7), and sqrt(8) only. "sqrtn"" implements dramatically fast. It takes only less than 1 minute to approximate sqrt(2) with 100,000 digits.
+An R pacakge to calculate sqrt(n) with very high precision. Currenly, we approximate sqrt(n) with n<10, that is, sqrt(2), sqrt(3), sqrt(5), sqrt(6), sqrt(7), and sqrt(8) only. "sqrtn"" implements dramatically fast. It takes only less than 30 seconds to approximate sqrt(2) with 100,000 digits.
 
 # Installation
 
@@ -11,7 +11,7 @@ An R pacakge to calculate sqrt(n) with very high precision. Currenly, we approxi
 
    - [x] [sqrtn-manual.pdf](https://github.com/xliusufe/sqrtn/blob/master/inst/sqrtn-manual.pdf) ---------- Details of the usage of the package.
    
-   - [x] [sqrt2-approx.pdf](https://github.com/xliusufe/sqrtn/blob/master/inst/sqrt2-approx.pdf) ---------- The first one million digits of the square root of 2.
+   - [x] [sqrt2.pdf](https://github.com/xliusufe/sqrtn/blob/master/inst/sqrt2-approx.pdf) ---------- The first one million digits of the square root of 2.
    
    - [x] [sqrt3.md](https://github.com/xliusufe/sqrtn/blob/master/inst/sqrt3.md) ---------- The first many digits of the square root of 3.
       
