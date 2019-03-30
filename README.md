@@ -1,5 +1,5 @@
 # sqrtn
-An R pacakge to calculate sqrt(n) with very high precision. Currenly, we approximate sqrt(2), sqrt(3), sqrt(5), and sqrt(7) only. "sqrtn"" implements dramatically fast. It takes only less than 1 minute to approximate sqrt(2) with 100,000 digits.
+An R pacakge to calculate sqrt(n) with very high precision. Currenly, we approximate sqrt(n) with n<10, that is, sqrt(2), sqrt(3), sqrt(5), sqrt(6), sqrt(7), and sqrt(8) only. "sqrtn"" implements dramatically fast. It takes only less than 1 minute to approximate sqrt(2) with 100,000 digits.
 
 # Installation
 
@@ -17,7 +17,11 @@ An R pacakge to calculate sqrt(n) with very high precision. Currenly, we approxi
       
    - [x] [sqrt5.md](https://github.com/xliusufe/sqrtn/blob/master/inst/sqrt5.md) ---------- The first many digits of the square root of 5.
  
+   - [x] [sqrt6.md](https://github.com/xliusufe/sqrtn/blob/master/inst/sqrt6.md) ---------- The first many digits of the square root of 6.
+   
    - [x] [sqrt7.md](https://github.com/xliusufe/sqrtn/blob/master/inst/sqrt7.md) ---------- The first many digits of the square root of 7.
+   
+   - [x] [sqrt8.md](https://github.com/xliusufe/sqrtn/blob/master/inst/sqrt8.md) ---------- The first many digits of the square root of 8.
    
 # Example
     library(sqrtn)
