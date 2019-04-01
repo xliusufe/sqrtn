@@ -164,14 +164,22 @@ void plus1(int *a, int b, int curr_len){
 	}
 }
 
-void minus0(int *a, int *b, int *pa2, int Lb){
-	int i,temp,*pa,*pb=&b[0];
-	pa=pa2;
-	for(i=0;i<Lb;i++){
-		temp=*pa-*pb; 
-		if(temp>=0){*pa=temp;pa++;}
-		else{*pa=temp+10;pa++;(*pa)--;}
-		pb++;
+int compare(int *b, int *pa1, int La){
+	int i,*pa=pa1,*pb=&b[La-1];	
+	for(i=La-1;i>=0;i--){
+		if(*pa>*pb) return 1;
+		if(*pa<*pb) return 0;
+		pa--;pb--;
+	}
+	return 1;
+}
+
+void minus(int *d, int *q, int Ld) {
+	int i, temp;
+	for (i = 0; i < Ld; i++, q++) {
+		temp =*d-*q;
+		if (temp >= 0){*d = temp;d++;}
+		else {*d = temp + 10;d++;(*d)--;}
 	}
 }
 
@@ -191,19 +199,20 @@ void divide_k(int *a, int *b, int La, int *pa2, int n){
 }
 
 int divide_single(int *a, int *b, int La, int *pa1,int *pa2, int Lb, int digit,int tempb){
-	int i,temp,temp1,*pa;	
+	int i,temp,temp1,*pa,*pb=&b[0];	
 	if(La>Lb){	
 		pa=pa1-digit;
 		temp=0;temp1=1;
 		for(i=0;i<digit+1;i++,pa++){
-			temp+=(*pa)*temp1;	temp1*=10;
+			temp+=(*pa)*temp1;
+			temp1*=10;
 		}
 		temp1=temp/tempb;
 		if(temp1==0) return 0;
-		if(temp1==1) minus0(a,b,pa2,Lb);
+		else if(temp1==1){ if(!compare(b,pa1,La)) temp1=0; else minus(pa2,pb,Lb);}
 		else{
 			temp1 = min(temp1,temp/(tempb+1));
-			if(temp1==1) minus0(a,b,pa2,Lb);
+			if(temp1==1) minus(pa2,pb,Lb);
 			else divide_k(a,b,La,pa2,temp1);
 		}
 	}
@@ -211,34 +220,35 @@ int divide_single(int *a, int *b, int La, int *pa1,int *pa2, int Lb, int digit,i
 		pa=pa1-digit+1;
 		temp=0;temp1=1;
 		for(i=0;i<digit;i++,pa++){
-			temp+=(*pa)*temp1;	temp1*=10;
+			temp+=(*pa)*temp1;
+			temp1*=10;
 		}
 		temp1=temp/tempb;
 		if(temp1==0) return 0;
-		if(temp1==1) minus0(a,b,pa2,Lb);
+		else if(temp1==1){ if(!compare(b,pa1,La)) temp1=0; else minus(pa2,pb,Lb);}
 		else{
 			temp1 = min(temp1,temp/(tempb+1));
-			if(temp1==1) minus0(a,b,pa2,Lb);
+			if(temp1==1) minus(pa2,pb,Lb); 
 			else divide_k(a,b,La,pa2,temp1);
 		}
 	}
 	return temp1;	
 }
 
-void divide(int *quotient, int *a, int *b, int La, int Lb,int prec){
-	int i,pr=0,count,digit,temp1,tempb=0,*pa1,*pa2;
+void divide(int *quotient, int *a, int *b, int La, int Lb, int k0,int prec){
+	int i,pr=0,count,digit,temp1,tempb=0,*pa1,*pa2,*pb=&b[0];
 	if(Lb<8) digit=3;
 	else digit=4;
 	temp1=1;
 	for(i=digit;i>0;i--){
-		tempb+=b[Lb-i]*temp1; temp1*=10;
+		tempb+=b[Lb-i]*temp1;temp1*=10;
 	}
 	pa2=&a[2*prec-La]; 
-	minus0(a,b,pa2,Lb);
+	if(k0>1) divide_k(a,b,La,pa2,k0);
+	else minus(a,pb,Lb);
 	pa1=&a[2*prec-1];
 	while(pr<prec){
-		pa1=pa2+Lb-1;
-		count=0;	
+		pa1=pa2+Lb-1; count=0;	
 		while(!(*pa1)){count++;pa1--;}
 		if(count){ 	
 			if(count>1)	pr+=count-1;						
@@ -253,7 +263,7 @@ void divide(int *quotient, int *a, int *b, int La, int Lb,int prec){
 
 void precesion(char *quotient_s, int prec0,int n){	
 	int i,*a,*b,*quotient,f1=sqrt(1.0*n),prec; 	
-	prec0<22?(prec=24):(prec=prec0);
+	prec=(prec0<22)?24:prec0;
 	quotient=(int *)malloc(sizeof(int)*prec);
 	for(i=0;i<prec;i++) quotient[i]=0;
 	a=(int *)malloc(sizeof(int)*2*prec);
@@ -269,7 +279,7 @@ void precesion(char *quotient_s, int prec0,int n){
 	if(n==8) pf8(a,b,Lab,prec,prec/2);
 	int *pa1=&a[2*prec-1],*pa2=&a[Lab[0]-1];
 	for(i=0;i<Lab[0];i++,pa1--,pa2--){*pa1=*pa2;*pa2=0;}
-	divide(quotient,a,b,Lab[0],Lab[1],prec);
+	divide(quotient,a,b,Lab[0],Lab[1],f1,prec);
 	quotient_s[0]=f1+48; quotient_s[1]='.';
 	for(i=2;i<prec0+2;i++) quotient_s[i] = quotient[i-2]+48;
 	quotient_s[prec0+2]='\0';
