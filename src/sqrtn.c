@@ -242,11 +242,11 @@ void divide(int *quotient, int *a, int *b, int La, int Lb, int k0,int prec){
 	temp1=1;
 	for(i=digit;i>0;i--){
 		tempb+=b[Lb-i]*temp1;temp1*=10;
-	}
-	pa2=&a[2*prec-La]; 
+	}	 
+	pa2=&a[2*prec-La];
 	if(k0>1) divide_k(a,b,La,pa2,k0);
 	else minus(a,pb,Lb);
-	pa1=&a[2*prec-1];
+	pa1=&a[2*prec-1]; pa2=&a[2*prec-La];
 	while(pr<prec){
 		pa1=pa2+Lb-1; count=0;	
 		while(!(*pa1)){count++;pa1--;}
