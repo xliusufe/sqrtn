@@ -3,7 +3,7 @@ Type: Package
 Title: Calculate sqrt(n) with very high precision
 Version: 1.0
 Date: 2019-03-16
-Author: Xu Liu
+Author: Xu Liu and Xiao Zhang
 Maintainer: Xu Liu <liu.xu@sufe.edu.cn>
 Description: Calculate sqrt(n) with very high precision, for example 10,000 or bigger. 
 License: GPL (>= 2)
