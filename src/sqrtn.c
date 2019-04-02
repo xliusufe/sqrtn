@@ -245,7 +245,7 @@ void divide(int *quotient, int *a, int *b, int La, int Lb, int k0,int prec){
 	}	 
 	pa2=&a[2*prec-La];
 	if(k0>1) divide_k(a,b,La,pa2,k0);
-	else minus(a,pb,Lb);
+	else minus(pa2,pb,Lb);
 	pa1=&a[2*prec-1]; pa2=&a[2*prec-La];
 	while(pr<prec){
 		pa1=pa2+Lb-1; count=0;	
