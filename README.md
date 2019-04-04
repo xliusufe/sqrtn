@@ -11,6 +11,8 @@ An R pacakge to calculate sqrt(n) with very high precision. "sqrtn"" implements 
 
    - [x] [sqrtn-manual.pdf](https://github.com/xliusufe/sqrtn/blob/master/inst/sqrtn-manual.pdf) ---------- Details of the usage of the package.
    
+   - [x] [A web-based calculator is available at] [https://xliusufe.shinyapps.io/sqrtn/](https://xliusufe.shinyapps.io/sqrtn/).   
+   
    - [x] [sqrt2.md](https://github.com/xliusufe/sqrtn/blob/master/inst/sqrt2.md) ---------- The first one hundred thousand digits of the square root of 2.
    
    - [x] [sqrt3.md](https://github.com/xliusufe/sqrtn/blob/master/inst/sqrt3.md) ---------- The first many digits of the square root of 3.
