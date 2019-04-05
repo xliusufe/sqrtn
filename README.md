@@ -1,6 +1,3 @@
----
-output: pdf_document
----
 # sqrtn
 An R pacakge to calculate sqrt(n) with very high precision. "sqrtn"" implements dramatically fast. It takes only less than 30 seconds to approximate sqrt(2) with 100,000 digits. Function sqrtn2() can approximate sqrt(n) for any positive integer, but sqrtn() only for n=2,3,5,6,7,8. The last two or three digits may be incorrect. For seek of safety, it is better to input two or three more to guarantee precision.
 
