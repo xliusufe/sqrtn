@@ -14,15 +14,15 @@ int findk(int *de, int digit, int fd) {
 
 void divide_20k(int *d, int *q, int k, int Lq) {
 	int temp, temp1 = k * k;
-	temp = *d - temp1 % 10;
-	temp1 /= 10;
-	if (temp >= 0){*d = temp;d--;}
+	temp = *d - temp1 % 10;	temp1 /= 10;
+	if (temp >= 0) {*d = temp;d--;}
 	else {*d = temp + 10;d--;(*d)--;}
 	k *= 2;
 	for (int i = 0; i < Lq; i++) {
 		temp1 += (*q)*k;q--;
-		temp = *d - temp1 % 10;	temp1 /= 10;
-		if (temp >= 0) {*d = temp;d--;}
+		temp = *d - temp1 % 10;
+		temp1 /= 10;
+		if (temp >= 0) {*d = temp;	d--;}
 		else {*d = temp + 10;d--;(*d)--;}
 	}
 	while (temp1) {
@@ -36,11 +36,12 @@ void abnormal(int *d, int *q, int k, int Lq) {
 	int temp1 = (k * 2) - 1;
 	*d -= 1;
 	for (int i = 0; i < Lq; i++) {
-		temp1 += (*q) * 20 + *d - 9;q--;
-		while (temp1 < 0) { temp1 += 10; *(d - 1)-=1; }
+		temp1 += (*q) * 20 + *d - 9;
+		q--;
+		while (temp1 < 0) {temp1 += 10; *(d - 1)-=1; }
 		*d = temp1 % 10;d--;temp1 /= 10;
 	}
-	while (temp1) {*d = temp1 % 10;	d--;temp1 /= 10;}
+	while (temp1) {*d = temp1 % 10;d--;temp1 /= 10;}
 	while (*d != -1) { *d = 0; d--; }
 	*d = 0;
 }
@@ -49,7 +50,7 @@ int searchk(int *de, int Ld, int pre) {
 	int number = 0;
 	pre = pre << 1;
 	for (int i = Ld; i > 0; i--)
-	{number = number * 10 + *de;*de++;}
+	{number = number * 10 + *de; de++;}
 	int c = number / pre;
 	while (c*(c + pre) > number) c--;
 	return c;
@@ -60,28 +61,23 @@ void divi(char *qt, int prec, int number, int Ln) {
 	int *q = (int *)calloc(prec, sizeof(int));
 	int *qe = q;
 	int *d = (int *)calloc(prec * 2, sizeof(int));
-	if (Ln % 2) { digit = 0; }
-	else { digit = 1; }
+	if (Ln % 2) digit = 0; else digit = 1; 
 	de = d + Ln;
 	while (number) { de--; *de = number % 10; number /= 10; }
 
 	k = *de;
 	if (!(Ln % 2)) { d++; k = k * 10 + *d; }
-	while (k >= fd * fd) { fd++; }
-	fd--;
-	*q = fd; Lq = 1; pr++;
-	k = fd * fd;
+	while (k >= fd * fd) fd++;
+	fd--; *q = fd; Lq = 1; pr++; k = fd * fd;
 	if (k >= 10)
-	{*d -= k % 10;
-		if (*d < 0) { *d += 10; *de--; }
+	{	*d -= k % 10;
+		if (*d < 0) { *d += 10; (*de)--; }
 		*de -= k / 10;
 	}
-	else {
-		*d -= k % 10;
-		if (*d < 0) { *d += 10; *de--; }
+	else {*d -= k;
+		if (*d < 0) { *d += 10; (*de)--; }
 	}
 	while (!(*de)) { de++; digit--; }
-
 	while (pr < para)
 	{
 		d += 2; digit += 2; fd *= 10;
@@ -93,11 +89,9 @@ void divi(char *qt, int prec, int number, int Ln) {
 	digit += para;
 	while (pr < prec)
 	{
-		k = findk(de, digit, fd);
-		d += 2;
-		if (k) {
-			divide_20k(d, q, k, Lq);
-			if (*(de - 1) < 0) {abnormal(d, q, k, Lq); k--; }
+		k = findk(de, digit, fd);d += 2;
+		if (k) {divide_20k(d, q, k, Lq);
+			if (*(de - 1) < 0) { abnormal(d, q, k, Lq); k--; }
 			while (!(*de)) { de++; digit--; }
 		}
 		if (k >= 10) {
@@ -108,11 +102,12 @@ void divi(char *qt, int prec, int number, int Ln) {
 		else { q++; *q = k; }
 		Lq++;digit++;pr++;
 	}
-
-	int i = (Ln - 1) / 2; prec -= i;
-	for (; i >= 0; i--, qe++, qt++) *qt = *qe + 48;
+	
+	int i = (Ln - 1) / 2; 
+	prec -= Ln/2+Ln%2;
+	for (; i >= 0; i--, qe++, qt++) { *qt = *qe + 48; }
 	*qt = '.'; qt++;
-	for (; prec > 0; prec--, qe++, qt++)*qt = *qe + 48;
+	for (; prec > 0; prec--, qe++, qt++) { *qt = *qe + 48; }
 	*qt='\0';
 }
 
