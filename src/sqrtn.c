@@ -274,7 +274,7 @@ void precesion(char *quotient_s, int prec0,int n){
 	if(n==2) pf2(a,b,Lab,prec,prec/2);
 	if(n==3) pf3(a,b,Lab,prec,prec/2);
 	if(n==5) pf5(a,b,Lab,prec,prec/2);
-	if(n==6) pf5(a,b,Lab,prec,prec/2);
+	if(n==6) pf6(a,b,Lab,prec,prec/2);
 	if(n==7) pf7(a,b,Lab,prec,prec/2);
 	if(n==8) pf8(a,b,Lab,prec,prec/2);
 	int *pa1=a+2*prec-1,*pa2=a+Lab[0]-1;
